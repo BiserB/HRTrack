@@ -28,6 +28,8 @@ namespace HRTrack.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ClusterId = table.Column<int>(type: "int", nullable: false),
+                    EmailNotificationsEnabled = table.Column<bool>(type: "bit", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -45,7 +47,8 @@ namespace HRTrack.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id)
+                        .Annotation("SqlServer:Clustered", false);
                 });
 
             migrationBuilder.CreateTable(
@@ -185,6 +188,12 @@ namespace HRTrack.Data.Migrations
                 name: "EmailIndex",
                 table: "AspNetUsers",
                 column: "NormalizedEmail");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_ClusterId",
+                table: "AspNetUsers",
+                column: "ClusterId")
+                .Annotation("SqlServer:Clustered", true);
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",

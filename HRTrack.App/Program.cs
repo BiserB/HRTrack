@@ -1,5 +1,8 @@
 
 using HRTrack.Data;
+using HRTrack.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace HRTrack.App
@@ -16,6 +19,14 @@ namespace HRTrack.App
             {
                 b.UseSqlServer(builder.Configuration.GetConnectionString("SQLServerDB"));
             });
+
+            builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = true;
+                options.User.RequireUniqueEmail = true;
+            })
+            .AddEntityFrameworkStores<HRTrackDbContext>()
+            .AddDefaultTokenProviders();
 
             var app = builder.Build();
 

@@ -30,6 +30,9 @@ namespace HRTrack.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<int>("ClusterId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -39,6 +42,9 @@ namespace HRTrack.Data.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("EmailNotificationsEnabled")
                         .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
@@ -75,6 +81,12 @@ namespace HRTrack.Data.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
+
+                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"), false);
+
+                    b.HasIndex("ClusterId");
+
+                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("ClusterId"));
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");

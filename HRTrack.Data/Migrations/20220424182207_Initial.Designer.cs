@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRTrack.Data.Migrations
 {
     [DbContext(typeof(HRTrackDbContext))]
-    [Migration("20220420171717_Initial")]
+    [Migration("20220424182207_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,6 +32,9 @@ namespace HRTrack.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<int>("ClusterId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -41,6 +44,9 @@ namespace HRTrack.Data.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("EmailNotificationsEnabled")
                         .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
@@ -77,6 +83,12 @@ namespace HRTrack.Data.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
+
+                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"), false);
+
+                    b.HasIndex("ClusterId");
+
+                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("ClusterId"));
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");

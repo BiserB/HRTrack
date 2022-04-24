@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRTrack.Data", "HRTrack.Dat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRTrack.Entities", "HRTrack.Entities\HRTrack.Entities.csproj", "{3992E7DA-56FF-4D79-81BC-C2D4BFC10287}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRTrack.Common", "HRTrack.Common\HRTrack.Common.csproj", "{389B2E7D-6A08-44A0-B76C-C50A16DA1753}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{3992E7DA-56FF-4D79-81BC-C2D4BFC10287}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3992E7DA-56FF-4D79-81BC-C2D4BFC10287}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3992E7DA-56FF-4D79-81BC-C2D4BFC10287}.Release|Any CPU.Build.0 = Release|Any CPU
+		{389B2E7D-6A08-44A0-B76C-C50A16DA1753}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{389B2E7D-6A08-44A0-B76C-C50A16DA1753}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{389B2E7D-6A08-44A0-B76C-C50A16DA1753}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{389B2E7D-6A08-44A0-B76C-C50A16DA1753}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

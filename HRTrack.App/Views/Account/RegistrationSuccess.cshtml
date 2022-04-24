@@ -1,0 +1,27 @@
+﻿
+@model HRTrack.Common.Models.Account.RegistrationSuccessModel
+@{
+	Layout = "_BaseLayout";
+	ViewData["Title"] = "Registration Success";
+}
+
+<section id="registration-success" class="membership-form message-tooltip container-fluid side-padding" data-ga-registration="registration_success">
+	<div class="row">
+		<div class="col-md-10 offset-md-1">
+			<div class="text-l-bold fs-md-xl text-center mt-5 mt-md-7">Успешна регистрация! Остава само потвърждение на имейл.</div>
+
+			<div class="form-body">
+				<div class="text-s-semibold text-center mt-2 mt-md-3">
+					До няколко минути ще получите съобщение на <span class="text-s-extrabold user-email">@(Model.Email)</span>.<br>
+					Кликнете активационния линк и завършете регистрацията.
+				</div>
+				<div class="text-center mt-2 mb-5 mb-md-7 text-kate text-xxs-semibold fs-md-xs">
+					Ако имате въпроси или нужда от помощ, пишете ни на <a href="mailto:support@hrtrack.bg">support@hrtrack.bg</a>.
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
