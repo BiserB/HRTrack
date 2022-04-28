@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using HRTrack.Entities
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> signInManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,6 +10,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/HRTrack.App.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 </head>
 <body>
     <header>
@@ -22,13 +26,25 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="/Account/Login">Login</a>
-                        </li>
+                        
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
+                    <form class="d-flex">
+                        @if (signInManager.IsSignedIn(this.User))
+                        {
+                            <div class="rounded-circle border d-flex justify-content-center align-items-center"
+                             style="width:32px;height:32px"
+                             alt="Avatar">
+                                <i class="bi bi-person-fill"></i>
+                            </div>
+                        }
+                        else
+                        {
+                            <a class="nav-link text-dark" href="/Account/Login">Login</a>                        
+                        }
+                    </form>
                 </div>
             </div>
         </nav>

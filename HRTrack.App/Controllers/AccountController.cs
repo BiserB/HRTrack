@@ -260,6 +260,18 @@ namespace HRTrack.App.Controllers
             return View();
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Lockout()
+        {
+            if (this.signInManager.IsSignedIn(this.User))
+            {
+                return LocalRedirect("/Main/Index");
+            }
+
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
