@@ -30,7 +30,7 @@ namespace HRTrack.App.Controllers
         {
             if (this.signInManager.IsSignedIn(this.User))
             {
-                return LocalRedirect("/Main/Index");
+                return LocalRedirect("/Main/Dashboard");
             }
 
             ViewData["ReturnUrl"] = returnUrl;
@@ -120,7 +120,7 @@ namespace HRTrack.App.Controllers
         {
             if (this.signInManager.IsSignedIn(this.User))
             {
-                return LocalRedirect("/Main/Index");
+                return LocalRedirect("/Main/Dashboard");
             }
 
             ViewData["ReturnUrl"] = returnUrl;
@@ -150,7 +150,7 @@ namespace HRTrack.App.Controllers
 
                 await this.userManager.UpdateAsync(user);
 
-                return LocalRedirect("/Main/Index");
+                return LocalRedirect("/Main/Dashboard");
             }
 
             if (result.RequiresTwoFactor)
@@ -266,7 +266,7 @@ namespace HRTrack.App.Controllers
         {
             if (this.signInManager.IsSignedIn(this.User))
             {
-                return LocalRedirect("/Main/Index");
+                return LocalRedirect("/Main/Dashboard");
             }
 
             return View();

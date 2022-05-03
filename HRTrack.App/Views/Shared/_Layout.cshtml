@@ -26,25 +26,38 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
-                    <form class="d-flex">
+                    <div class="d-flex">
                         @if (signInManager.IsSignedIn(this.User))
                         {
-                            <div class="rounded-circle border d-flex justify-content-center align-items-center"
-                             style="width:32px;height:32px"
-                             alt="Avatar">
-                                <i class="bi bi-person-fill"></i>
+                            <div class="dropdown">
+                                <div id="userMenuButton" data-bs-toggle="dropdown" aria-expanded="false" class="rounded-circle border d-flex justify-content-center align-items-center"
+                                 style="width:32px;height:32px" alt="Avatar">
+                                    <i class="bi bi-person-fill"></i>
+                                </div>
+                                <ul class="dropdown-menu dropdown-menu-start dropdown-menu-lg-end" aria-labelledby="userMenuButton">
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-file-person pe-2"></i>Profile</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-gear pe-2"></i>Settings</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <form class="form-inline" asp-controller="Account" asp-action="Logout" method="post">
+                                            <button type="submit" class="dropdown-item">
+                                                <i class="bi bi-power pe-2"></i>Logout
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
                             </div>
                         }
                         else
                         {
-                            <a class="nav-link text-dark" href="/Account/Login">Login</a>                        
+                            <a class="nav-link text-dark" href="/Account/Login">Login</a>
                         }
-                    </form>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -64,5 +77,27 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        function logout(){
+          $.ajax({
+                url : "/account/logout",
+                type: "POST",
+                data : null,
+                success: function(data, textStatus, jqXHR)
+                {
+                    console.log("data..", data);
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    console.log("error");
+                }
+            });
+         }
+
+         $('#logout').on('click', function(){
+             console.log("logout");
+             logout();
+         });
+    </script>
 </body>
 </html>
