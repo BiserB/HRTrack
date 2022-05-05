@@ -31,7 +31,10 @@ namespace HRTrack.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("ClusterId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClusterId"), 1L, 1);
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()

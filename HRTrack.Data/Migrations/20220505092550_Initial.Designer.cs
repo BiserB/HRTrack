@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRTrack.Data.Migrations
 {
     [DbContext(typeof(HRTrackDbContext))]
-    [Migration("20220424182207_Initial")]
+    [Migration("20220505092550_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,7 +33,10 @@ namespace HRTrack.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("ClusterId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClusterId"), 1L, 1);
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()

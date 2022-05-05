@@ -194,15 +194,15 @@ namespace HRTrack.App.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
                 // Send an email with this link
-                var code = await userManager.GeneratePasswordResetTokenAsync(user);
+                var token = await userManager.GeneratePasswordResetTokenAsync(user);
 
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+                var callbackUrl = Url.Action(nameof(ResetPassword), "Account", new { token, email = user.Email }, protocol: HttpContext.Request.Scheme);
 
                 var htmlMessage = "Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">link</a>";
 
                 await emailSender.SendEmailAsync(model.Email, "Reset Password", htmlMessage);
 
-                return View("ForgotPasswordConfirmation");
+                return View(nameof(ForgotPasswordConfirmation));
             }
 
             // If we got this far, something failed, redisplay form
@@ -218,9 +218,11 @@ namespace HRTrack.App.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult ResetPassword(string code = null)
+        public IActionResult ResetPassword(string token, string email)
         {
-            return code == null ? View("Error") : View();
+            var model = new ResetPasswordViewModel { Token = token, Email = email };
+
+            return View(model);
         }
 
         [HttpPost]
@@ -241,7 +243,7 @@ namespace HRTrack.App.Controllers
                 return RedirectToAction(nameof(AccountController.ResetPasswordConfirmation), "Account");
             }
 
-            var result = await userManager.ResetPasswordAsync(user, model.Code, model.Password);
+            var result = await userManager.ResetPasswordAsync(user, model.Token, model.Password);
 
             if (result.Succeeded)
             {

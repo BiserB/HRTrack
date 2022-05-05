@@ -29,6 +29,8 @@ namespace HRTrack.App
             .AddEntityFrameworkStores<HRTrackDbContext>()
             .AddDefaultTokenProviders();
 
+            builder.Services.Configure<DataProtectionTokenProviderOptions>(opt => opt.TokenLifespan = TimeSpan.FromHours(2));
+
             builder.Services.AddTransient<IEmailSender, MailKitEmailSender>();
             builder.Services.Configure<MailKitEmailSenderOptions>(options =>
             {

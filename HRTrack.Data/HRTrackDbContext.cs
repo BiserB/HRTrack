@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace HRTrack.Data
 {
@@ -20,7 +21,8 @@ namespace HRTrack.Data
 
             mb.Entity<AppUser>().HasKey(e => e.Id).IsClustered(false);
             mb.Entity<AppUser>().HasIndex(e => e.ClusterId).IsClustered();
-
+            mb.Entity<AppUser>().Property(e => e.ClusterId).ValueGeneratedOnAdd();
+            mb.Entity<AppUser>().Property(e => e.ClusterId).Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
         }
     }
 }

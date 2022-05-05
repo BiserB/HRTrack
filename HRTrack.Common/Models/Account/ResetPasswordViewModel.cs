@@ -19,6 +19,6 @@ namespace HRTrack.Common.Models.Account
         [Compare(nameof(Password), ErrorMessage = "Паролите не съвпадат.")]
         public string ConfirmPassword { get; set; }
 
-        public string Code { get; set; }
+        public string Token { get; set; }
     }
 }
